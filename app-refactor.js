@@ -5,9 +5,8 @@ const signInForm = document.getElementById('sign-in');
 const baseURL = 'http://localhost:3000/';
 const signUpURL = baseURL + 'users';
 
-signUpForm.addEventListener('submit', event => {
-  event.preventDefault();
-  const formData = new FormData(event.target);
+function createBody(form) {
+  const formData = new FormData(form);
   const username = formData.get('username');
   const password = formData.get('password');
   const body = JSON.stringify({
@@ -15,34 +14,35 @@ signUpForm.addEventListener('submit', event => {
     password,
   });
 
-  event.target.reset();
+  return body;
+}
 
-  fetch(signUpURL, {
+function postRequest(url, body) {
+  fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body,
   });
+}
+
+signUpForm.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const body = createBody(event.target);
+
+  event.target.reset();
+
+  postRequest(signUpURL, body);
 });
 
 signInForm.addEventListener('submit', event => {
   event.preventDefault();
-  const formData = new FormData(event.target);
-  const username = formData.get('username');
-  const password = formData.get('password');
-  const body = JSON.stringify({
-    username,
-    password,
-  });
+
+  const body = createBody(event.target);
 
   event.target.reset();
 
-  fetch(signInRoute, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body,
-  });
+  postRequest(signInRoute, body);
 });

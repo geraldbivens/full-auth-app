@@ -6,12 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="app.css" />
-    <script src="app.js" defer></script>
+    <script src="app-refactor.js" defer></script>
   </head>
   <body>
     <h1>Full auth app</h1>
     <h2>Sign up</h2>
     <form id="sign-up">
+      <label>Username</label>
+      <input type="text" name="username" />
+      <label>Password</label>
+      <input type="text" name="password" />
+      <input type="submit" />
+    </form>
+
+    <h2>Login</h2>
+    <form id="sign-in">
       <label>Username</label>
       <input type="text" name="username" />
       <label>Password</label>
