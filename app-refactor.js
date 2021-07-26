@@ -4,6 +4,7 @@ const signUpForm = document.getElementById('sign-up');
 const signInForm = document.getElementById('sign-in');
 const baseURL = 'http://localhost:3000/';
 const signUpURL = baseURL + 'users';
+const signInURL = baseURL + 'signin';
 
 function createBody(form) {
   const formData = new FormData(form);
@@ -44,5 +45,5 @@ signInForm.addEventListener('submit', event => {
 
   event.target.reset();
 
-  postRequest(signInRoute, body);
+  postRequest(signInURL, body);
 });
