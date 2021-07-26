@@ -19,7 +19,7 @@ function createBody(form) {
 }
 
 function postRequest(url, body) {
-  fetch(url, {
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -45,5 +45,14 @@ signInForm.addEventListener('submit', event => {
 
   event.target.reset();
 
-  postRequest(signInURL, body);
+  postRequest(signInURL, body)
+    .then(response => response.json())
+    .then(result => {
+      if (result.token) {
+        localStorage.setItem('token', result.token);
+        const h3 = document.createElement('h3');
+        h3.textContent = `Welcome ${result.user.username}!`;
+        document.body.appendChild(h3);
+      }
+    });
 });
